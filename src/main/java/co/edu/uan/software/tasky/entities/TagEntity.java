@@ -1,5 +1,6 @@
 package co.edu.uan.software.tasky.entities;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  * Tag Entity, for task storage.
@@ -15,11 +18,16 @@ import javax.persistence.Id;
 public class TagEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "uid", nullable = false)
     private UUID uid;
     @Column(name = "name", nullable = false)
     public String name;
     @Column(name = "color")
     public String color;
+
+    /* @OneToMany
+    @JoinColumn(name = "tag_id")
+    private List<TaskEntity> tasks; */
 
     public TagEntity() {
     }
