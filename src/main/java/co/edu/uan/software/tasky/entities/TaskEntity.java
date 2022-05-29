@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "TASK")
@@ -21,10 +20,9 @@ public class TaskEntity {
     private String user_id;
     @Column(name = "task_list_id")
     private String task_list_id;
-
-    /* @ManyToOne
-    @JoinColumn(name = "tag_id", insertable = false, updatable = false)
-    private TagEntity tag; */
+    
+    @ManyToOne
+    private Usuario usuario;
 
     public TaskEntity() {
     }
@@ -45,9 +43,9 @@ public class TaskEntity {
         this.user_id = user_id;
     }
 
-    public TaskEntity(String descripValue, String userIdValue) {
+    public TaskEntity(String descripValue, Usuario userValue) {
         this.setDescripcion(descripValue);
-        this.setUserId(userIdValue);
+        this.setUsuario(userValue);
     }
 
     @Override
@@ -55,7 +53,7 @@ public class TaskEntity {
         return "Task: { id: " + id + ", descripción: " + descripcion + " }";
     }
 
-    public @Id @GeneratedValue UUID getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -69,6 +67,20 @@ public class TaskEntity {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    /**
+     * @return Usuario return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }
