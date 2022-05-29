@@ -16,8 +16,6 @@ public class TaskEntity {
     private UUID id;
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "user_id")
-    private String user_id;
     @Column(name = "task_list_id")
     private String task_list_id;
     
@@ -33,14 +31,6 @@ public class TaskEntity {
 
     public void setTaskListId(String task_list_id) {
         this.task_list_id = task_list_id;
-    }
-
-    public String getUserId() {
-        return user_id;
-    }
-
-    public void setUserId(String user_id) {
-        this.user_id = user_id;
     }
 
     public TaskEntity(String descripValue, Usuario userValue) {
@@ -82,5 +72,4 @@ public class TaskEntity {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
 }

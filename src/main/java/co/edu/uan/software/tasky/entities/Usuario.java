@@ -167,5 +167,4 @@ public class Usuario {
     public void addTask(TaskEntity task) {
         this.tasks.add(task);
     }
-
 }

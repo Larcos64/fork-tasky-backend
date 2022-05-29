@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -17,17 +18,14 @@ import javax.persistence.OneToMany;
 @Entity(name = "tags")
 public class TagEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "uid", nullable = false)
     private UUID uid;
     @Column(name = "name", nullable = false)
     public String name;
     @Column(name = "color")
     public String color;
-
-    /* @OneToMany
-    @JoinColumn(name = "tag_id")
-    private List<TaskEntity> tasks; */
 
     public TagEntity() {
     }
