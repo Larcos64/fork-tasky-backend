@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity(name = "TASK")
+@Entity(name = "tasks")
 public class TaskEntity {
     @Id @GeneratedValue(strategy = GenerationType.AUTO) 
     @Column(name = "uid", nullable = false)
