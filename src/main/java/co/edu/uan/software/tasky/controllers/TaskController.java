@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.uan.software.tasky.entities.TagEntity;
 import co.edu.uan.software.tasky.entities.TaskEntity;
 import co.edu.uan.software.tasky.entities.Usuario;
+import co.edu.uan.software.tasky.repositories.TagRepository;
 import co.edu.uan.software.tasky.repositories.TaskRepository;
 import co.edu.uan.software.tasky.repositories.UsuarioRepository;
 
@@ -32,10 +34,12 @@ import co.edu.uan.software.tasky.repositories.UsuarioRepository;
 public class TaskController {
     private final TaskRepository repo;
     private final UsuarioRepository usuariosRepo;
+    private final TagRepository tagRepo;
 
-    TaskController(TaskRepository r, UsuarioRepository ur) {
+    TaskController(TaskRepository r, UsuarioRepository ur, TagRepository tr) {
         this.repo = r;
         this.usuariosRepo = ur;
+        this.tagRepo = tr;
     }
 
     /**
@@ -57,12 +61,19 @@ public class TaskController {
      */
     @PostMapping("/usuarios/{usuario_id}/tasks")
     public ResponseEntity<TaskEntity> createUserTask(
-            @PathVariable(name = "usuario_id", required = true) UUID usuario_id, @RequestBody TaskEntity task) {
+            @PathVariable(name = "usuario_id", required = true) UUID usuario_id, 
+            @PathVariable(name = "tag_id", required = true) UUID tag_id,
+            @RequestBody TaskEntity task) {
         Optional<Usuario> usuario = usuariosRepo.findById(usuario_id);
         if (!usuario.isPresent()) {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         task.setUsuario(usuario.get());
+        Optional<TagEntity> tag = tagRepo.findById(tag_id);
+        if (!tag.isPresent()) {
+            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        task.setTag(tag.get());
         return new ResponseEntity<>(this.repo.save(task), HttpStatus.CREATED);
     }
 

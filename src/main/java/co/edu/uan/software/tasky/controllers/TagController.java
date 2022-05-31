@@ -53,7 +53,8 @@ public class TagController {
             System.out.println(colorCode);
             tag.setColor(colorCode);
         }
-
+        
+        System.out.println(tag.getName());
         if (tag.getName().isEmpty() || tag.getName().isBlank()) {
             return new ResponseEntity<>(tag, HttpStatus.BAD_REQUEST);
         } else {

@@ -22,6 +22,9 @@ public class TaskEntity {
     @ManyToOne
     private Usuario usuario;
 
+    @ManyToOne
+    private TagEntity tag;
+
     public TaskEntity() {
     }
 
@@ -71,5 +74,19 @@ public class TaskEntity {
      */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    /**
+     * @return TagEntity return the tag
+     */
+    public TagEntity getTag() {
+        return tag;
+    }
+
+    /**
+     * @param tag the tag to set
+     */
+    public void setTag(TagEntity tag) {
+        this.tag = tag;
     }
 }
